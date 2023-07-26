@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="/public/indexstyle.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+</head>
+
+
+<body>
+  <header class="topbar">
+    <span>歡迎光臨，請輸入帳號密碼</span>
+  </header>
+  <section class="form">
+    <form action="{{ url_for('signin') }}" method="POST" onsubmit="return login()">
+      <span class="sign_text">登入系統</span>
+      <div class="info1">
+        <span style="margin-top: 8px;">帳號</span>
+        <input class="box1" type="text" name="account" />
+      </div>
+      <div class="info2">
+        <span style="margin-top: 8px;">密碼</span>
+        <input class="box2" type="password" name="password" />
+      </div>
+      </span>
+      <div style="margin-top: 8px; margin-left: 65px;">同意條款<input type="checkbox" name="law"
+          style="margin-left: 5px;" /></div>
+      <div class="button">
+        <button type="submit">登入</button>
+      </div>
+    </form>
+    <form action="{{url_for('getnumber')}}" method="POST" onsubmit="return checked()">
+      <div class=" calculate_text">
+        <span>計算正整數的平方</span>
+      </div>
+      <div class="info3">
+        <span style="margin-top: 8px;">正整數</span>
+        <input class="box3" type="text" name="number" />
+      </div>
+      <div class="button">
+        <button type="submit">計算</button>
+      </div>
+    </form>
+    <script>
+      function login() {
+        let checkbox = document.querySelector('input[name="law"]');//name代表參數的字
+        if (!checkbox.checked) {
+          alert("Please check the checkbox first");
+          return false; //防止表單送出
+        }
+        return true;
+        //不要用===null，雖然邏輯類似，但是checked的判別是F/T，用null無法得到想要的結果，另button是表單，是發送請求給HTTP，而非超連結
+      }
+      function checked() {
+        let checkbox = document.querySelector('input[name="number"]');
+        let inputValue = parseInt(checkbox.value);//轉成整數
+        if (isNaN(inputValue) || inputValue < 0) {
+          alert(" Please enter a positive number");
+          return false;
+        }
+        return true;
+      }
+    </script>
+  </section>
+</body>
+
+</html>
