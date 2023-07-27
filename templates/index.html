@@ -29,7 +29,8 @@
         <button type="submit">登入</button>
       </div>
     </form>
-    <form action="{{url_for('getnumber')}}" method="POST" onsubmit="return checked()">
+    <form onsubmit="return checked();">
+      {#不再使用{{url_for('square')}}(回傳表單的方式，因為這樣html會不符合格式) #}
       <div class=" calculate_text">
         <span>計算正整數的平方</span>
       </div>
@@ -58,7 +59,8 @@
           alert(" Please enter a positive number");
           return false;
         }
-        return true;
+        location.href = "/square/" + inputValue;
+        return false;// 防止表單的預設提交動作
       }
     </script>
   </section>
